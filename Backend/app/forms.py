@@ -2,11 +2,21 @@ from django import forms
 from .models import Cliente
 import re
 
+class ClienteForm(forms.ModelForm):
+    confirmar_contraseña = forms.CharField(widget=forms.PasswordInput())
 
-class RegistroClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = "__all__"
+        fields = ['nombre', 'fecha_nacimiento', 'telefono', 'direccion', 'email', 'contraseña']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        contraseña = cleaned_data.get("contraseña")
+        confirmar_contraseña = cleaned_data.get("confirmar_contraseña")
+
+        if contraseña and confirmar_contraseña and contraseña != confirmar_contraseña:
+            raise forms.ValidationError("Las contraseñas no coinciden")
+
 
     def clean_nombre(self):
         nombre = self.cleaned_data["nombre"]

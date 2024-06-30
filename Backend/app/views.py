@@ -1,23 +1,30 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
-from .forms import RegistroClienteForm
-from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
+from .forms import ClienteForm
+from .models import Cliente
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
 
+@login_required
+def clientes_lista(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'app/clientes_lista.html', {'clientes': clientes})
+
 def registro_cliente(request):
-    if request.method == "POST":
-        form = RegistroClienteForm(request.POST)
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("home")
+            return redirect('clientes_lista')
     else:
-        form = RegistroClienteForm()
-    return render(request, "app/Formulario.html", {"form": form})
-
+        form = ClienteForm()
+    
+    return render(request, 'app/Formulario.html', {'form': form})
 
 def login_view(request):
     if request.method == "POST":
@@ -33,6 +40,7 @@ def login_view(request):
             return JsonResponse({"success": False, "error": "Credenciales inválidas"})
 
     return JsonResponse({"success": False, "error": "Método no permitido"})
+
 
 
 def logout_view(request):
@@ -78,7 +86,3 @@ def MotoTouring(request):
 def MotoUrbana(request):
     context = {}
     return render(request, "app/MotoUrbana.html", context)
-
-
-class RegistroUsuarioStandardView(TemplateView):
-    template_name = 'app/registro_usuario_standard.html'

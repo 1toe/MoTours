@@ -26,5 +26,4 @@ urlpatterns = [
         views.eliminar_producto,
         name="eliminar_producto",
     ),
-path('registro/', views.RegistroUsuarioStandardView.as_view(), name='registro_usuario_standard'),
 ]

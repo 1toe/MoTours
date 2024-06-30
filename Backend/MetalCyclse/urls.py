@@ -26,9 +26,12 @@ urlpatterns = [
     path("administrador/", include("administrador.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("", views.home, name="home"),
-    path('registro/', views.RegistroUsuarioStandardView.as_view(), name='registro_usuario_standard'),
+    path('registro/', views.registro_cliente, name='registrar_cliente'),
+    path('clientes_lista/', views.clientes_lista, name='clientes_lista'),
+
 ]
 
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
