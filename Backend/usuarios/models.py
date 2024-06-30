@@ -10,6 +10,5 @@ class Usuario(AbstractUser):
     class Meta:
         swappable = 'AUTH_USER_MODEL'
 
-# Add related_name to resolve conflicts
 Usuario._meta.get_field('groups').remote_field.related_name = 'usuario_set'
 Usuario._meta.get_field('user_permissions').remote_field.related_name = 'usuario_permissions_set'
