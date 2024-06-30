@@ -26,4 +26,5 @@ urlpatterns = [
         views.eliminar_producto,
         name="eliminar_producto",
     ),
+    path('login/', CustomLoginView.as_view(), name='login'),
 ]

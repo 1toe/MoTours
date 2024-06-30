@@ -17,9 +17,8 @@ class ModeloMoto(models.Model):
     def __str__(self):
         return f"{self.nombre} ({self.tipo})"
 
-
 class Producto(models.Model):
-    modelo = models.ForeignKey(ModeloMoto, on_delete=models.CASCADE)
+    modelo = models.ForeignKey('ModeloMoto', on_delete=models.CASCADE)
     descripcion = models.TextField()
     precio = models.IntegerField()
     imagen = models.ImageField(upload_to="productos/", null=True, blank=True)
