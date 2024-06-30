@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.forms import ModelForm
-from administrador.models import TipoMoto, ModeloMoto, Producto
+from administrador.models import TipoMoto, ModeloMoto, Producto, UsuarioStandard
 
 # Register your models here.
 
@@ -37,6 +37,12 @@ class ProductoAdmin(admin.ModelAdmin):
     )
 
 
+class UsuarioStandardAdmin(admin.ModelAdmin):
+    list_display = ("username", "email", "first_name", "last_name")
+    search_fields = ("username", "email")
+
+
 admin.site.register(TipoMoto, TipoMotoAdmin)
 admin.site.register(ModeloMoto, ModeloMotoAdmin)
 admin.site.register(Producto, ProductoAdmin)
+admin.site.register(UsuarioStandard, UsuarioStandardAdmin)

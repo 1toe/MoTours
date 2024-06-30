@@ -4,7 +4,11 @@ from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from .models import Producto
 from .forms import ProductoForm
-
+from .forms import RegistroUsuarioStandardForm
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.shortcuts import render
+from .forms import RegistroUsuarioStandardForm
 
 @login_required(login_url="/administrador/accounts/login/")
 def menu(request):
@@ -63,3 +67,27 @@ def eliminar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     producto.delete()
     return redirect("administrador:lista_productos")
+
+
+# administrador/views.py
+
+
+# administrador/views.py
+from django.shortcuts import render
+from django.views.generic import TemplateView
+from .forms import RegistroUsuarioStandardForm
+
+class RegistroUsuarioStandardView(TemplateView):
+    template_name = 'registro_usuario_standard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = RegistroUsuarioStandardForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = RegistroUsuarioStandardForm(request.POST)
+        if form.is_valid():
+            # Process the form data
+            pass
+        return render(request, self.template_name, {'form': form})

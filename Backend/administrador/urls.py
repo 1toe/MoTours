@@ -26,5 +26,5 @@ urlpatterns = [
         views.eliminar_producto,
         name="eliminar_producto",
     ),
-    path('login/', CustomLoginView.as_view(), name='login'),
+path('registro/', views.RegistroUsuarioStandardView.as_view(), name='registro_usuario_standard'),
 ]

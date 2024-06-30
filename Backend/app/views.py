@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
 from .forms import RegistroClienteForm
+from django.views.generic import TemplateView
 
 
 # Create your views here.
@@ -77,3 +78,7 @@ def MotoTouring(request):
 def MotoUrbana(request):
     context = {}
     return render(request, "app/MotoUrbana.html", context)
+
+
+class RegistroUsuarioStandardView(TemplateView):
+    template_name = 'app/registro_usuario_standard.html'
