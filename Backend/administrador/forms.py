@@ -1,8 +1,5 @@
 from django import forms
-from administrador.models import (
-    Producto,
-)  # Importación absoluta desde administrador.models
-
+from .models import Producto
 
 class ProductoForm(forms.ModelForm):
     class Meta:

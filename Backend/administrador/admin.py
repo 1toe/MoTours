@@ -1,17 +1,16 @@
 from django.contrib import admin
-from django.forms import ModelForm
-from administrador.models import TipoMoto, ModeloMoto, Producto
+from .models import Admin, TipoMoto, ModeloMoto, Producto
 
-# Register your models here.
-
+@admin.register(Admin)
+class AdminAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'is_admin')
+    search_fields = ('username', 'email')
 
 class TipoMotoAdmin(admin.ModelAdmin):
     pass
 
-
 class ModeloMotoAdmin(admin.ModelAdmin):
     list_display = ("nombre", "tipo")
-
 
 class ProductoAdmin(admin.ModelAdmin):
     fieldsets = (
@@ -35,7 +34,6 @@ class ProductoAdmin(admin.ModelAdmin):
             },
         ),
     )
-
 
 admin.site.register(TipoMoto, TipoMotoAdmin)
 admin.site.register(ModeloMoto, ModeloMotoAdmin)

@@ -5,23 +5,19 @@ from django.contrib.auth.views import LoginView
 from .models import Producto
 from .forms import ProductoForm
 
-
 @login_required(login_url="/administrador/accounts/login/")
 def menu(request):
     context = {}
     return render(request, "administrador/menu.html", context)
 
-
 class CustomLoginView(LoginView):
     template_name = "registration/login.html"
-
 
 @login_required
 @permission_required("administrador.view_producto", raise_exception=True)
 def lista_productos(request):
     productos = Producto.objects.all()
     return render(request, "administrador/productoLista.html", {"productos": productos})
-
 
 @login_required
 @permission_required("administrador.add_producto")
@@ -36,7 +32,6 @@ def agregar_producto(request):
         else:
             data["form"] = formulario
     return render(request, "administrador/agregarProducto.html", data)
-
 
 @login_required
 @permission_required("administrador.change_producto", raise_exception=True)
@@ -55,7 +50,6 @@ def modificar_producto(request, id):
         "administrador/modificarProducto.html",
         {"form": formulario, "producto": producto},
     )
-
 
 @login_required
 @permission_required("administrador.delete_producto", raise_exception=True)
