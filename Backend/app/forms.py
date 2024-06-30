@@ -1,29 +1,25 @@
 from django import forms
 from .models import Cliente
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 import re
 
 class ClienteForm(forms.ModelForm):
-    confirmar_contraseña = forms.CharField(widget=forms.PasswordInput())
-
     class Meta:
         model = Cliente
         fields = ['nombre', 'fecha_nacimiento', 'telefono', 'direccion', 'email', 'contraseña']
 
-    def clean(self):
-        cleaned_data = super().clean()
-        contraseña = cleaned_data.get("contraseña")
-        confirmar_contraseña = cleaned_data.get("confirmar_contraseña")
-
-        if contraseña and confirmar_contraseña and contraseña != confirmar_contraseña:
-            raise forms.ValidationError("Las contraseñas no coinciden")
-
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if Cliente.objects.filter(email__iexact=email).exists():
+            raise forms.ValidationError("El email ya existe en la base de datos.")
+        return email
+    
 
     def clean_nombre(self):
         nombre = self.cleaned_data["nombre"]
         if not re.match(r"^[a-zA-Z\s]+$", nombre):
-            raise forms.ValidationError(
-                "El nombre solo puede contener letras y espacios."
-            )
+            raise forms.ValidationError("El nombre solo puede contener letras y espacios.")
         return nombre
 
     def clean_fecha_nacimiento(self):
@@ -44,18 +40,9 @@ class ClienteForm(forms.ModelForm):
             raise forms.ValidationError("Este campo es obligatorio.")
         return direccion
 
-    def clean_email(self):
-        email = self.cleaned_data["email"]
-        if not re.match(
-            r"^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-\.]+$", email
-        ):
-            raise forms.ValidationError("El correo electrónico no es válido.")
-        return email
+class RegistroUsuarioForm(UserCreationForm):
+    email = forms.EmailField(required=True)
 
-    def clean_contraseña(self):
-        contraseña = self.cleaned_data["contraseña"]
-        if not re.match(
-            r"^(?=.*\d)(?=.*[a-z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$", contraseña
-        ):
-            raise forms.ValidationError("La contraseña no cumple los requisitos.")
-        return contraseña
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']

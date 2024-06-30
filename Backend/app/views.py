@@ -1,15 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import login_required
 from .forms import ClienteForm
 from .models import Cliente
-from django.contrib.auth.decorators import login_required
+from .models import CarritoItem
 
+def agregar_al_carrito(request, producto, precio):
+    item, created = CarritoItem.objects.get_or_create(producto=producto, precio=precio)
+    if not created:
+        item.cantidad += 1
+        item.save()
+    return redirect('ver_carrito')
 
-# Create your views here.
-
-
+def ver_carrito(request):
+    carrito = CarritoItem.objects.all()
+    total = sum(item.total() for item in carrito)
+    return render(request, 'app/carrito.html', {'carrito': carrito, 'total': total})
 @login_required
 def clientes_lista(request):
     clientes = Cliente.objects.all()
@@ -26,32 +34,28 @@ def registro_cliente(request):
     
     return render(request, 'app/Formulario.html', {'form': form})
 
+@csrf_protect
 def login_view(request):
     if request.method == "POST":
         email = request.POST.get("email")
-        contraseña = request.POST.get("contraseña")
+        password = request.POST.get("password")
 
-        user = authenticate(request, username=email, password=contraseña)
+        user = authenticate(request, username=email, password=password)
 
         if user is not None:
             login(request, user)
-            return JsonResponse({"success": True, "username": user.username})
+            return redirect('clientes_lista')
         else:
-            return JsonResponse({"success": False, "error": "Credenciales inválidas"})
+            return render(request, 'app/login.html', {'error': 'Credenciales inválidas'})
 
-    return JsonResponse({"success": False, "error": "Método no permitido"})
-
-
+    return render(request, 'app/login.html')
 
 def logout_view(request):
     logout(request)
     return redirect("home")
 
-
 def home(request):
-    context = {}
-    return render(request, "app/home.html", context)
-
+    return render(request, "app/home.html")
 
 def MotoAdventure(request):
     context = {}

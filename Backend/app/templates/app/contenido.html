@@ -1,0 +1,147 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block contenido %}
+<!-- XRE300 -->
+<section>
+    <img class="img-moto img-fluid" src="{% static 'app/img/Adventure1.png' %}" alt="">
+    <h2>XRE300</h2>
+    <p class="p-moto fw-bold fs-5 fs-md-6">$ 5.990.000</p>
+
+    <div class="accordion accordion-flush" id="accordionFlushExampleXRE300">
+        <div class="accordion accordion-flush w-100" style="border-radius: 10px;">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed text btn-secondary mb-2" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOneXRE300" aria-expanded="false"
+                    aria-controls="flush-collapseOneXRE300">
+                    Descripción
+                </button>
+            </h2>
+            <div id="flush-collapseOneXRE300" class="accordion-collapse collapse"
+                data-bs-parent="#accordionFlushExampleXRE300">
+                <div class="parrafo-moto row justify-content-center">
+                    <p class="fw-bold text-light rectangulo-fondo">La XRE300 ABS cuenta con
+                        un estanque de 13.8 litros para disfrutar grandes trayectos. La nueva versión de la XRE300 ABS incluye una
+                        suspensión delantera de 245 mm. de recorrido y 225 mm. en la trasera, brindando una excelente estabilidad en
+                        terrenos irregulares. Muévete seguro, tranquilo y confiado.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion accordion-flush w-100" style="border-radius: 10px;">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed text btn-secondary mb-2" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#flush-collapseTwoXRE300" aria-expanded="false"
+                    aria-controls="flush-collapseTwoXRE300">
+                    Especificaciones
+                </button>
+            </h2>
+            <div id="flush-collapseTwoXRE300" class="accordion-collapse collapse"
+                data-bs-parent="#accordionFlushExampleXRE300">
+                <div class="table-responsive">
+                    <table class="table" border="2">
+                        <tr>
+                            <th>Cilindraje</th>
+                            <td>291,6 cc</td>
+                        </tr>
+                        <tr>
+                            <th>Peso</th>
+                            <td>163 kg</td>
+                        </tr>
+                        <tr>
+                            <th>Potencia Máxima</th>
+                            <td>25 HP A 7.500 RPM</td>
+                        </tr>
+                        <tr>
+                            <th>Torque Máximo</th>
+                            <td>27 Nm a 6.000 RPM</td>
+                        </tr>
+                        <tr>
+                            <th>Tipo de motor</th>
+                            <td>Monocilíndrico, 4 Tiempos, DOHC, enfriado por aire</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="botones-rectangulo row justify-content-center">
+            <div class="col-auto">
+                <a href="{% url 'agregar_al_carrito' 'XRE300' 5990000 %}" class="btn btn-secondary">Agregar al carrito</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- YZ-250X -->
+<section>
+    <img class="img-moto" src="{% static 'app/img/YZ-250X.png' %}" alt="">
+    <h2>YZ-250X</h2>
+    <p class="p-moto fw-bold">$ 7.290.000</p>
+
+    <div class="accordion accordion-flush" id="accordionFlushExampleYZ-250X">
+        <div class="accordion accordion-flush w-100" style="border-radius: 10px;">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed text btn-secondary mb-2" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOneYZ-250X" aria-expanded="false"
+                    aria-controls="flush-collapseOneYZ-250X">
+                    Descripción
+                </button>
+            </h2>
+            <div id="flush-collapseOneYZ-250X" class="accordion-collapse collapse"
+                data-bs-parent="#accordionFlushExampleYZ-250X">
+                <div class="parrafo-moto row justify-content-center">
+                    <p class="fw-bold text-light rectangulo-fondo">La nueva YZ250X dos tiempos está desarrollada
+                        específicamente para carreras Off-Road. Está diseñada para atraer a los pilotos que
+                        prefieren el manejo preciso, la entrega de potencia instantánea y el mantenimiento sencillo del motor en
+                        revoluciones altas.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="accordion accordion-flush w-100" style="border-radius: 10px;">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed text btn-secondary mb-2" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#flush-collapseTwoYZ-250X" aria-expanded="false"
+                    aria-controls="flush-collapseTwoYZ-250X">
+                    Especificaciones
+                </button>
+            </h2>
+            <div id="flush-collapseTwoYZ-250X" class="accordion-collapse collapse"
+                data-bs-parent="#accordionFlushExampleYZ-250X">
+                <div class="table-responsive">
+                    <table class="table" border="2">
+                        <tr>
+                            <th>Cilindrada</th>
+                            <td>249 cm3</td>
+                        </tr>
+                        <tr>
+                            <th>Peso</th>
+                            <td>104 Kg</td>
+                        </tr>
+                        <tr>
+                            <th>Sistema de lubricación</th>
+                            <td>Mezcla previa, YAMALUBE 2R, 30:1</td>
+                        </tr>
+                        <tr>
+                            <th>Tipo de embrague</th>
+                            <td>Multidisco en baño de aceite</td>
+                        </tr>
+                        <tr>
+                            <th>Tipo de motor</th>
+                            <td>2 tiempos, refrigerado por líquido, YPVS, inducción por válvula de láminas</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="botones-rectangulo row justify-content-center">
+            <div class="col-auto">
+                <a href="{% url 'agregar_al_carrito' 'YZ-250X' 7290000 %}" class="btn btn-secondary">Agregar al carrito</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
