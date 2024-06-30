@@ -24,9 +24,10 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            return JsonResponse({"success": True, "username": user.username})
+            return redirect("home")  # Redirigir a la página principal
+        
         else:
-            return JsonResponse({"success": False, "error": "Credenciales inválidas"})
+            return redirect("registro")  # Redirigir a la página de registro
 
     return render(request, "app/login.html")
 

@@ -5,13 +5,22 @@ from django.contrib.auth.views import LoginView
 from .models import Producto
 from .forms import ProductoForm
 
-@login_required(login_url="/administrador/accounts/login/")
+@login_required(login_url="/administrador/accounts/loginAdmin/")
 def menu(request):
     context = {}
     return render(request, "administrador/menu.html", context)
 
+
+@login_required(login_url="/administrador/accounts/loginAdmin/")
+def login_admin(request):
+    context = {}
+    return render(request, "administrador/loginAdmin.html", context)
+
+
+
 class CustomLoginView(LoginView):
-    template_name = "registration/login.html"
+    template_name = "registration/loginAdmin.html"
+
 
 @login_required
 @permission_required("administrador.view_producto", raise_exception=True)
