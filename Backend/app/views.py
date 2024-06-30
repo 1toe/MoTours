@@ -7,6 +7,9 @@ from .forms import ClienteForm
 from .models import Cliente
 from .models import CarritoItem
 
+def tienda(request):
+    return render(request, 'app/contenido.html')
+
 def agregar_al_carrito(request, producto, precio):
     item, created = CarritoItem.objects.get_or_create(producto=producto, precio=precio)
     if not created:
@@ -18,6 +21,8 @@ def ver_carrito(request):
     carrito = CarritoItem.objects.all()
     total = sum(item.total() for item in carrito)
     return render(request, 'app/carrito.html', {'carrito': carrito, 'total': total})
+
+
 @login_required
 def clientes_lista(request):
     clientes = Cliente.objects.all()

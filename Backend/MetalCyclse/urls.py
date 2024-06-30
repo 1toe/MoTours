@@ -30,8 +30,10 @@ urlpatterns = [
     path('clientes_lista/', views.clientes_lista, name='clientes_lista'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('agregar/<str:producto>/<int:precio>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('tienda/', views.tienda, name='tienda'),  # Ruta para la tienda
+    path('agregar_al_carrito/<str:producto>/<int:precio>/', views.agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/', views.ver_carrito, name='ver_carrito'),
+
 ]
 
 

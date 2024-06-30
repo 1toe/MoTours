@@ -15,7 +15,8 @@ urlpatterns = [
     path("MotoTouring", views.MotoTouring, name="MotoTouring"),
     path("MotoUrbana", views.MotoUrbana, name="MotoUrbana"),
     path("accounts/", include("django.contrib.auth.urls")),
-    path('agregar/<str:producto>/<int:precio>/', views.agregar_al_carrito, name='agregar_al_carrito'),
+    path('tienda/', views.tienda, name='tienda'),  # Ruta para la tienda
+    path('agregar_al_carrito/<str:producto>/<int:precio>/', views.agregar_al_carrito, name='agregar_al_carrito'),
     path('carrito/', views.ver_carrito, name='ver_carrito'),
 ]
 
