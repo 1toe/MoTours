@@ -19,6 +19,8 @@ urlpatterns = [
     path('MotoScooter', views.MotoScooter, name='MotoScooter'),
     path('MotoTouring', views.MotoTouring, name='MotoTouring'),
     path('MotoUrbana', views.MotoUrbana, name='MotoUrbana'),
+    path('tienda/', views.tienda, name='tienda'),  # Nueva URL para la tienda
+    path('carrito/', views.carrito, name='carrito'),  # Nueva URL para el carrito
 ]
 
 if settings.DEBUG:

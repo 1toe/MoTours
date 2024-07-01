@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from django.http import JsonResponse
-from .forms import RegistroClienteForm
-
+from .forms import RegistroClienteForm, AñadirAlCarritoForm
+from .models import Producto, Carrito, CarritoItem
+from django.shortcuts import redirect, get_object_or_404
+from .models import Producto
 def registro_cliente(request):
     if request.method == "POST":
         form = RegistroClienteForm(request.POST)
@@ -25,7 +26,6 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return redirect("home")  # Redirigir a la página principal
-        
         else:
             return redirect("registro")  # Redirigir a la página de registro
 
@@ -36,34 +36,71 @@ def logout_view(request):
     return redirect("home")
 
 def home(request):
-    context = {}
-    return render(request, "app/home.html", context)
+    return render(request, "app/home.html")
+
 
 
 def MotoAdventure(request):
-    context = {}
-    return render(request, "app/MotoAdventure.html", context)
+    productos_adventure = Producto.objects.filter(tipo='Adventure')
+    return render(request, "app/MotoAdventure.html", {'productos': productos_adventure})
+
 
 def Formulario(request):
-    context = {}
-    return render(request, "app/Formulario.html", context)
+    return render(request, "app/Formulario.html")
 
 def MotoCompeticion(request):
-    context = {}
-    return render(request, "app/MotoCompeticion.html", context)
+    return render(request, "app/MotoCompeticion.html")
 
 def MotoDeportiva(request):
-    context = {}
-    return render(request, "app/MotoDeportiva.html", context)
+    return render(request, "app/MotoDeportiva.html")
 
 def MotoScooter(request):
-    context = {}
-    return render(request, "app/MotoScooter.html", context)
+    return render(request, "app/MotoScooter.html")
 
 def MotoTouring(request):
-    context = {}
-    return render(request, "app/MotoTouring.html", context)
+    return render(request, "app/MotoTouring.html")
 
 def MotoUrbana(request):
-    context = {}
-    return render(request, "app/MotoUrbana.html", context)
+    return render(request, "app/MotoUrbana.html")
+
+def tienda(request):
+    productos = Producto.objects.all()
+    context = {
+        'productos': productos
+    }
+    return render(request, 'app/tienda.html', context)
+
+def carrito(request):
+    carrito = request.session.get('carrito', {})
+    productos = Producto.objects.filter(id__in=carrito.keys())
+    carrito_items = []
+
+    for producto in productos:
+        cantidad = carrito[str(producto.id)]
+        carrito_items.append({
+            'producto': producto,
+            'cantidad': cantidad,
+            'subtotal': producto.precio * cantidad
+        })
+
+    total = sum(item['subtotal'] for item in carrito_items)
+    context = {
+        'carrito_items': carrito_items,
+        'total': total
+    }
+    return render(request, 'app/carrito.html', context)
+def tienda(request):
+    productos = Producto.objects.all()
+    return render(request, 'app/tienda.html', {'productos': productos})
+def agregar_al_carrito(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    carrito, created = Carrito.objects.get_or_create(user=request.user)
+    carrito_item, created = CarritoItem.objects.get_or_create(carrito=carrito, producto=producto)
+    if not created:
+        carrito_item.cantidad += 1
+        carrito_item.save()
+    return redirect('carrito')
+def ver_carrito(request):
+    carrito = CarritoItem.objects.all()
+    total = sum(item.total() for item in carrito)
+    return render(request, 'app/carrito.html', {'carrito': carrito, 'total': total})

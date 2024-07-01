@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente
+from .models import Cliente, CarritoItem
 import re
 
 class RegistroClienteForm(forms.ModelForm):
@@ -45,3 +45,8 @@ class RegistroClienteForm(forms.ModelForm):
         if not re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$", password):
             raise forms.ValidationError("La contraseña no cumple los requisitos.")
         return password
+
+class AñadirAlCarritoForm(forms.ModelForm):
+    class Meta:
+        model = CarritoItem
+        fields = ['cantidad']

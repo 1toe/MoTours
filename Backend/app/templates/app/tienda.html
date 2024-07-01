@@ -1,0 +1,128 @@
+{% extends 'app/base.html' %}
+    {% load static %}
+{% block contenido %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Sección Motos Urbanas -->
+        <div class="col-md-4 img-fluid mb-4">
+            <div class="secciones">
+                <hr class="rounded mb-3">
+                <h1 class="fs-4">Motos Urbanas</h1>
+                <hr class="rounded mb-3">
+            </div>
+            <div class="card">
+                <img src="{% static 'app/img/Moto_tarjeta1.png' %}" class="card-img-top" alt="Moto Urbana">
+                <div class="card-body">
+                    <h5 class="card-title">Moto Urbana</h5>
+                    <p class="card-text">Descripción breve de la moto urbana.</p>
+                    <div class="text-center">
+                        <a href="{% url 'MotoUrbana' %}" class="btn btn-primary">Ir a Motos Urbanas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fin sección Motos Urbanas -->
+
+        <!-- Sección Motos Deportivas -->
+        <div class="col-md-4 mb-4">
+            <div class="secciones">
+                <hr class="rounded mb-3">
+                <h1 class="fs-4">Motos Deportivas</h1>
+                <hr class="rounded mb-3">
+            </div>
+            <div class="card zoom-on-hover">
+                <img src="{% static 'app/img/Moto_tarjeta2.jpeg' %}" class="card-img-top" alt="Moto Deportiva">
+                <div class="card-body">
+                    <h5 class="card-title">Moto Deportiva</h5>
+                    <p class="card-text">Descripción breve de la moto deportiva.</p>
+                    <div class="text-center">
+                        <a href="{% url 'MotoDeportiva' %}" class="btn btn-primary">Ir a Motos Deportivas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin sección Motos Deportivas -->
+
+        <!-- Sección Motos Competición -->
+        <div class="col-md-4 mb-4">
+            <div class="secciones">
+                <hr class="rounded mb-3">
+                <h1 class="fs-4">Motos Competición</h1>
+                <hr class="rounded mb-3">
+            </div>
+            <div class="card">
+                <img src="{% static 'app/img/Moto_tarjeta3.png' %}" class="card-img-top" alt="Moto Competición">
+                <div class="card-body">
+                    <h5 class="card-title">Moto Competición</h5>
+                    <p class="card-text">Descripción breve de la moto de competición.</p>
+                    <div class="text-center">
+                        <a href="{% url 'MotoCompeticion' %}" class="btn btn-primary">Ir a Motos Competición</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin sección Motos Competición -->
+
+        <!-- Sección Motos Scooter -->
+        <div class="col-md-4 img-fluid mb-4">
+            <div class="secciones">
+                <hr class="rounded mb-3">
+                <h1 class="fs-4">Motos Scooter</h1>
+                <hr class="rounded mb-3">
+            </div>
+            <div class="card">
+                <img src="{% static 'app/img/Moto_tarjeta4.png' %}" class="card-img-top" alt="Moto Scooter">
+                <div class="card-body">
+                    <h5 class="card-title">Moto Scooter</h5>
+                    <p class="card-text">Descripción breve de la moto scooter.</p>
+                    <div class="text-center">
+                        <a href="{% url 'MotoScooter' %}" class="btn btn-primary">Ir a Motos Scooter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin sección Motos Scooter -->
+
+        <!-- Sección Motos Adventure -->
+        <div class="col-md-4 img-fluid mb-4">
+            <div class="secciones">
+                <hr class="rounded mb-3">
+                <h1 class="fs-4">Motos Adventure</h1>
+                <hr class="rounded mb-3">
+            </div>
+            <div class="card">
+                <img src="{% static 'app/img/Moto_tarjeta5.png' %}" class="card-img-top" alt="Moto Adventure">
+                <div class="card-body">
+                    <h5 class="card-title">Motos Adventure</h5>
+                    <p class="card-text">Descripción breve de la moto adventure.</p>
+                    <div class="text-center">
+                        <a href="{% url 'MotoAdventure' %}" class="btn btn-primary">Ir a Motos Adventure</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin sección Motos Adventure -->
+
+        <!-- Sección Motos Touring -->
+        <div class="col-md-4 img-fluid mb-4">
+            <div class="secciones">
+                <hr class="rounded mb-3">
+                <h1 class="fs-4">Motos Touring</h1>
+                <hr class="rounded mb-3">
+            </div>
+            <div class="card">
+                <img src="{% static 'app/img/Moto_tarjeta6.png' %}" class="card-img-top" alt="Moto Touring">
+                <div class="card-body">
+                    <h5 class="card-title">Moto Touring</h5>
+                    <p class="card-text">Descripción breve de la moto touring.</p>
+                    <div class="text-center">
+                        <a href="{% url 'MotoTouring' %}" class="btn btn-primary">Ir a Motos Touring</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin sección Motos Touring -->
+    </div>
+</div>
+{% endblock %}

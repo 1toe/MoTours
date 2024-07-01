@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+{% block contenido %}
+<section>
+    <h2>Carrito de Compras</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in carrito_items %}
+            <tr>
+                <td>{{ item.producto.nombre }}</td>
+                <td>${{ item.producto.precio }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>${{ item.subtotal }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p class="fw-bold">Total: ${{ total }}</p>
+</section>
+{% endblock %}
